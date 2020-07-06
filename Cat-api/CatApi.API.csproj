@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Cat_api</RootNamespace>
+    <RootNamespace>CatApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CatApi.DAL\CatApi.DAL.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/bungee-plugin" /></VisualStudio></ProjectExtensions>
 
 
 </Project>

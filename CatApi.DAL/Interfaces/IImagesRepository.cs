@@ -1,11 +1,12 @@
 ﻿using CatApi.DAL.Models;
+using System.Collections.Generic;
 
 namespace CatApi.DAL.Interfaces
 {
     public interface IImagesRepository
     {
-        Image GetRandomImage();
-
-        Image GetImageById(int id);
+        public IEnumerable<Image> GetAllImages();
+        public Image GetRandomImage();
+        public Image GetImageById(int id);
     }
 }

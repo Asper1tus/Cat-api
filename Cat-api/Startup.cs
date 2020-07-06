@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using CatApi.DAL.EF;
 using Microsoft.EntityFrameworkCore;
+using CatApi.DAL.Interfaces;
+using CatApi.DAL.Repositories;
+using CatApi.DAL;
 
 namespace CatApi.API
 {
@@ -27,8 +30,11 @@ namespace CatApi.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<ApplicationContext>(options => options.UseNpgsql
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer
             (Configuration.GetConnectionString("CatApiConnection")));
+
+            services.AddScoped<IImagesRepository, MockImagesRepository>();
+            services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

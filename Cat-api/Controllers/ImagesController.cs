@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using CatApi.DAL.Interfaces;
 using CatApi.DAL.Models;
-using CatApi.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CatApi.API.Controllers

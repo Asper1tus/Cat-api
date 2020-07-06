@@ -7,7 +7,7 @@ namespace CatApi.DAL.EF
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
        public DbSet<Image> Images { get; set; }
     }

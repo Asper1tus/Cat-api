@@ -33,7 +33,7 @@ namespace CatApi.API
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer
             (Configuration.GetConnectionString("CatApiConnection")));
 
-            services.AddScoped<IImagesRepository, MockImagesRepository>();
+            services.AddScoped<IImagesRepository, ImagesRepository>();
             services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
         }
 

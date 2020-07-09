@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using CatApi.DAL.Interfaces;
 using CatApi.DAL.Repositories;
 using CatApi.DAL;
+using AutoMapper;
 
 namespace CatApi.API
 {
@@ -32,6 +33,8 @@ namespace CatApi.API
             services.AddControllers();
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer
             (Configuration.GetConnectionString("CatApiConnection")));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IImagesRepository, ImagesRepository>();
             services.AddSingleton<ICloudStorage, GoogleCloudStorage>();

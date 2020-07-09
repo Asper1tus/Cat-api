@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using CatApi.DAL.Interfaces;
 using CatApi.DAL.Models;
-using CatApi.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +14,13 @@ namespace CatApi.API.Controllers
     {
         private readonly IImagesRepository repository;
         private readonly ICloudStorage cloudStorage;
+        private readonly IMapper mapper;
 
-        public ImagesController(IImagesRepository repository, ICloudStorage cloudStorage)
+        public ImagesController(IImagesRepository repository, ICloudStorage cloudStorage, IMapper mapper)
         {
             this.repository = repository;
             this.cloudStorage = cloudStorage;
+            this.mapper = mapper;
         }
 
         //GET api/images
@@ -30,7 +32,7 @@ namespace CatApi.API.Controllers
         }
 
         //GET api/images/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetImageById")]
         public ActionResult<Image> GetImageById(int id)
         {
             var imageItem = repository.GetImageById(id);
@@ -48,20 +50,20 @@ namespace CatApi.API.Controllers
 
         //POST api/images
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromForm] ImageViewModel uploadedImage)
+        public async Task<IActionResult> UploadImage([FromForm] IFormFile image)
         {
-            if (uploadedImage != null)
+            if(image == null)
             {
-                string imageName = uploadedImage.file.FileName;
-                var imageUrl = await cloudStorage.UploadFileAsync(uploadedImage.file, imageName);
-
-                Image imageItem = new Image { Url = imageUrl, Name = imageName };
-                repository.UploadImage(imageItem);
-
-                return Ok(imageItem);
+                return ValidationProblem();
             }
 
-            return BadRequest();
+            string imageName = image.FileName;
+            var imageUrl = await cloudStorage.UploadFileAsync(image, imageName);
+
+            var imageModel = mapper.Map<Image>( new Image { Url = imageUrl, Name = imageName });
+            repository.UploadImage(imageModel);
+
+            return CreatedAtRoute(nameof(GetImageById), new { imageModel.Id }, imageModel);
 
         }
     }

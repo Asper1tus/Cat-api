@@ -10,9 +10,9 @@ namespace CatApi.DAL.Repositories
         {
             var images = new List<Image>()
             {
-                new Image{Id = 0, Url = "google.com/image1", Heigth = 100, Width = 200 },
-                new Image{Id = 1, Url = "google.com/image2", Heigth = 300, Width = 400 },
-                new Image{Id = 2, Url = "google.com/image3", Heigth = 500, Width = 600 },
+                new Image{Id = 0, Url = "google.com/image1", Name = "image1" },
+                new Image{Id = 1, Url = "google.com/image2", Name = "image2" },
+                new Image{Id = 2, Url = "google.com/image3", Name = "image3" },
             };
 
             return images;
@@ -21,12 +21,17 @@ namespace CatApi.DAL.Repositories
 
         public Image GetImageById(int id)
         {
-            return new Image {Id = 0, Url = "google.com/image1", Heigth = 100, Width = 200 };
+            return new Image {Id = 0, Url = "google.com/image1", Name = "image1" };
         }
 
         public Image GetRandomImage()
         {
-            return new Image {Id = 1, Url = "google.com/image2", Heigth = 300, Width = 400 };
+            return new Image {Id = 1, Url = "google.com/image2", Name = "image2" };
+        }
+
+        public void UploadImage(Image image)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

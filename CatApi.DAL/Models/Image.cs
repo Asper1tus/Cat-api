@@ -7,12 +7,10 @@ namespace CatApi.DAL.Models
         [Key]
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         [Required]
         public string Url { get; set; }
-
-        public int Width { get; set; }
-
-        public int Heigth { get; set; }
     }
 
 }

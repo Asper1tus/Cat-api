@@ -1,9 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>CatApi</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <WrapperTool>tlbimp</WrapperTool>
+    </COMReference>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Storage.V1" Version="3.2.0" />
@@ -16,7 +25,7 @@
     <ProjectReference Include="..\CatApi.DAL\CatApi.DAL.csproj" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/bungee-plugin" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 
 </Project>

@@ -8,5 +8,6 @@ namespace CatApi.DAL.Interfaces
         public IEnumerable<Image> GetAllImages();
         public Image GetRandomImage();
         public Image GetImageById(int id);
+        public void UploadImage(Image image);
     }
 }

@@ -31,5 +31,11 @@ namespace CatApi.DAL.Repositories
         {
             return context.Images.OrderBy(o => Guid.NewGuid()).First();
         }
+
+        public void UploadImage(Image image)
+        {
+            context.Add(image);
+            context.SaveChanges();
+        }
     }
 }

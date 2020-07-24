@@ -36,6 +36,12 @@ namespace CatApi.API.Controllers
         public ActionResult<Image> GetImageById(int id)
         {
             var imageItem = repository.GetImageById(id);
+
+            if(imageItem == null)
+            {
+                return NotFound();
+            }
+
             return Ok(imageItem);
         }
 

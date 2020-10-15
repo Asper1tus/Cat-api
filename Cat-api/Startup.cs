@@ -10,8 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using CatApi.DAL.EF;
+using Microsoft.EntityFrameworkCore;
+using CatApi.DAL.Interfaces;
+using CatApi.DAL.Repositories;
+using CatApi.DAL;
+using AutoMapper;
 
-namespace Cat_api
+namespace CatApi.API
 {
     public class Startup
     {
@@ -22,13 +28,18 @@ namespace Cat_api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer
+            (Configuration.GetConnectionString("CatApiConnection")));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<IImagesRepository, ImagesRepository>();
+            services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
